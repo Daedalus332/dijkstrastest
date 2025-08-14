@@ -19,14 +19,20 @@ namespace dijkstrastest
             this.width = width;
             this.height = height;
 
+            //creates an array of nodes of the height and width specified
             arr = new node[height,width];
+
+            //for every row of nodes
             for (int i = 0; i < height; i++)
             {
+                //for every node in the row
                 for (int j = 0; j < width; j++)
                 {
+                    //get a random value that will be used to determine if it's a wall
                     int value = rand.Next(0, 20);
                     int[] currentCoords = { i, j };
 
+                    //if its the start or end then keep track of that
                     if(i == startCoords[0] &&  j == startCoords[1])
                     {
                         arr[i,j] = new node(true, false, startCoords, value, this);
@@ -35,14 +41,19 @@ namespace dijkstrastest
                     {
                         arr[i, j] = new node(false, true, endCoords, value, this);
                     }
+                    //else let it be
                     else arr[i, j] = new node(false, false, currentCoords, value, this);
                 }
             }
         }
+        //returns the node given its coords
         public node nodeGet(int[] coords)
         {
             return arr[coords[0], coords[1]];
         }
+
+
+        // This function is just for printing the map pretty
         public void getMap()
         {
             for (int i = 0; i < arr.GetLength(0); i++)
